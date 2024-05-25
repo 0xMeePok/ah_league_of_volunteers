@@ -1,8 +1,9 @@
 import { getEvents } from '@/lib/db';
 import { EventsTable } from './users-table';
 import { Search } from './search';
+import { auth } from '@/lib/auth';
 import OpenWidgetClient from './useOpenWidget';
-{/* hi */}
+
 export default async function IndexPage({
   searchParams
 }: {
@@ -20,8 +21,7 @@ export default async function IndexPage({
       <div className="w-full mb-4">
         <Search value={searchParams.q} />
       </div>
-      <EventsTable events={events} offset={newOffset} />
-       {/* Include the Client Component */}
+      <EventsTable events={events} offset={newOffset} session={await auth()}/>
        <OpenWidgetClient />
     </main>
   );
