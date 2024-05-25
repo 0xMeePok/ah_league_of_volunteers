@@ -1,6 +1,7 @@
 import { getEvents } from '@/lib/db';
 import { EventsTable } from './users-table';
 import { Search } from './search';
+import { auth } from '@/lib/auth';
 {/* hi */}
 export default async function IndexPage({
   searchParams
@@ -22,7 +23,7 @@ export default async function IndexPage({
       <div className="w-full mb-4">
         <Search value={searchParams.q} />
       </div>
-      <EventsTable events={events} offset={newOffset} />
+      <EventsTable events={events} offset={newOffset} session={await auth()}/>
     </main>
   );
 }
