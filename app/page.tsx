@@ -21,7 +21,7 @@ export default async function IndexPage({
       <div className="w-full mb-4">
         <Search value={searchParams.q} />
       </div>
-      <EventsTable events={events} offset={newOffset} session={await auth()}/>
+      <EventsTable events={events} offset={newOffset}/>
        <OpenWidgetClient />
     </main>
   );

@@ -1,12 +1,14 @@
 'use client';
 
 import { SelectEvent } from "@/lib/db";
+import { Session } from "next-auth";
 
 interface DetailsProps {
     details: SelectEvent;
+    session: Session | null;
 }
 
-export function Details({ details }: DetailsProps) {
+export function Details({ details, session }: DetailsProps) {
     const textClass = 'my-2';
     return (
         <>
@@ -37,6 +39,7 @@ export function Details({ details }: DetailsProps) {
                 <div style={{
                     textAlign: 'center'
                 }}>
+                    {session ?
                     <button style={{
                         color: "white",
                         width: 150,
@@ -45,6 +48,9 @@ export function Details({ details }: DetailsProps) {
                         height: 40,
                         textAlign: 'center',
                     }}>Register</button>
+                    : <></>
+                    }
+                    
                 </div>
             </div>
         </>

@@ -2,6 +2,7 @@
 import { getEventDetails } from "app/actions";
 import { Details } from "app/details";
 import OpenWidgetClient from '../../useOpenWidget';
+import { auth } from "@/lib/auth";
 
 interface ListingDetailsPageProps {
   params: {
@@ -14,7 +15,7 @@ export default async function ListingDetailsPage({ params }: ListingDetailsPageP
   const result = await getEventDetails(parseInt(event_id));
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
-        <Details details={result} />
+        <Details details={result} session={await auth()}/>
         {/* Include the Client Component */}
        <OpenWidgetClient />
     </main>
