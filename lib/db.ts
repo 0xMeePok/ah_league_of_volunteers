@@ -2,7 +2,7 @@ import 'server-only';
 
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, date } from 'drizzle-orm/pg-core';
 import { eq, ilike } from 'drizzle-orm';
 
 export const db = drizzle(
@@ -13,43 +13,50 @@ export const db = drizzle(
   })
 );
 
-const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 50 }),
-  username: varchar('username', { length: 50 }),
-  email: varchar('email', { length: 50 })
+{/* updated pgtable */}
+const events = pgTable('events', {
+  eid: serial('eid').primaryKey(),
+  email: varchar('email', { length: 255 }),
+  event_name: varchar('event_name', { length: 255 }),
+  organisation: varchar('organisation', { length: 255 }),
+  address: varchar('address', { length: 255 }),
+  region: varchar('region', { length: 255}),
+  description: varchar('description', {length: 255}),
+  start_date: date('start_date'),
+  end_date: date('end_date'),
+  duration: varchar('duration', {length: 255})
 });
 
-export type SelectUser = typeof users.$inferSelect;
+export type SelectEvent = typeof events.$inferSelect;
 
-export async function getUsers(
+export async function getEvents(
   search: string,
   offset: number
 ): Promise<{
-  users: SelectUser[];
+  events: SelectEvent[];
   newOffset: number | null;
 }> {
   // Always search the full table, not per page
   if (search) {
     return {
-      users: await db
+      events: await db
         .select()
-        .from(users)
-        .where(ilike(users.name, `%${search}%`))
+        .from(events)
+        .where(ilike(events.event_name, `%${search}%`))
         .limit(1000),
       newOffset: null
     };
   }
 
   if (offset === null) {
-    return { users: [], newOffset: null };
+    return { events: [], newOffset: null };
   }
 
-  const moreUsers = await db.select().from(users).limit(20).offset(offset);
-  const newOffset = moreUsers.length >= 20 ? offset + 20 : null;
-  return { users: moreUsers, newOffset };
+  const moreEvents = await db.select().from(events).limit(20).offset(offset);
+  const newOffset = moreEvents.length >= 20 ? offset + 20 : null;
+  return { events: moreEvents, newOffset };
 }
 
 export async function deleteUserById(id: number) {
-  await db.delete(users).where(eq(users.id, id));
+  await db.delete(events).where(eq(events.eid, id));
 }

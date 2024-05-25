@@ -9,15 +9,15 @@ import {
   Table
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { SelectUser } from '@/lib/db';
+import { SelectEvent } from '@/lib/db';
 import { deleteUser } from './actions';
 import { useRouter } from 'next/navigation';
 
-export function UsersTable({
-  users,
+export function EventsTable({
+  events,
   offset
 }: {
-  users: SelectUser[];
+  events: SelectEvent[];
   offset: number | null;
 }) {
   const router = useRouter();
@@ -32,15 +32,18 @@ export function UsersTable({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="max-w-[150px]">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Email</TableHead>
-              <TableHead className="hidden md:table-cell">Username</TableHead>
-              <TableHead></TableHead>
+              <TableHead className="max-w-[150px]">Event</TableHead>
+              <TableHead className="hidden md:table-cell">Organisation</TableHead>
+              <TableHead className="hidden md:table-cell">Address</TableHead>
+              <TableHead className="hidden md:table-cell">Region</TableHead>
+              <TableHead className="hidden md:table-cell">Start Date</TableHead>
+              <TableHead className="hidden md:table-cell">End Date</TableHead>
+              <TableHead className="hidden md:table-cell">Day of Week</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
-              <UserRow key={user.id} user={user} />
+            {events.map((event) => (
+              <EventRow key={event.eid} event={event} />
             ))}
           </TableBody>
         </Table>
@@ -58,15 +61,20 @@ export function UsersTable({
   );
 }
 
-function UserRow({ user }: { user: SelectUser }) {
-  const userId = user.id;
-  const deleteUserWithId = deleteUser.bind(null, userId);
+function EventRow({ event }: { event: SelectEvent }) {
+  const eventId = event.eid;
+  const deleteUserWithId = deleteUser.bind(null, eventId);
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{user.name}</TableCell>
-      <TableCell className="hidden md:table-cell">{user.email}</TableCell>
-      <TableCell>{user.username}</TableCell>
+      {/* 6 columns */}
+      <TableCell className="font-medium">{event.event_name}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.organisation}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.address}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.region}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.start_date}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.end_date}</TableCell>
+      <TableCell className="hidden md:table-cell">{event.duration}</TableCell>
       <TableCell>
         <Button
           className="w-full"
@@ -75,7 +83,7 @@ function UserRow({ user }: { user: SelectUser }) {
           formAction={deleteUserWithId}
           disabled
         >
-          Delete
+          More Info
         </Button>
       </TableCell>
     </TableRow>
