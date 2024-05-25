@@ -7,33 +7,32 @@ interface DetailsProps {
 }
 
 export function Details({ details }: DetailsProps) {
-    const textClass = 'text-center my-1';
+    const textClass = 'my-2';
     return (
         <>
             <div className="flex flex-col">
-                <div className="flex items-center mb-8">
-                    <h1 className="font-semibold text-lg md:text-2xl">
+                    <h1 className="text-center font-semibold text-lg md:text-2xl">
                         {details.event_name}
                     </h1>
-                </div>
+                    <br></br>
                 <img src="https://www.savethechildren.org/content/dam/global/images/countries/burundi/burunid-girl-baby-m194852-hero.jpg/_jcr_content/renditions/original.img.jpg" />
                 <text className={textClass}>
-                    organisation: {details.organisation}
+                    <strong>Organisation:</strong> {details.organisation}
                 </text>
 
                 <text className={textClass}>
-                    address: {details.address}
+                    <strong>Address:</strong> {details.address}
                 </text>
 
                 <text className={textClass}>
-                    region: {details.region}
+                    <strong>Region:</strong> {details.region}
                 </text>
 
                 <text className={textClass}>
-                    description: {details.description}
+                    <strong>Description:</strong> {details.description}
                 </text>
                 <text className={textClass}>
-                    duration: {details.duration}
+                    <strong>Duration:</strong> {details.duration}
                 </text>
                 <div style={{
                     textAlign: 'center'
@@ -45,7 +44,7 @@ export function Details({ details }: DetailsProps) {
                         borderRadius: 50,
                         height: 40,
                         textAlign: 'center',
-                    }}>register for event</button>
+                    }}>Register</button>
                 </div>
             </div>
         </>
