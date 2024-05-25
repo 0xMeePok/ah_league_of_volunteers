@@ -29,22 +29,18 @@ export default function RootLayout({
                   href="/"
                 >
                   <Logo />
-                  <span className="">ACME</span>
+                  <span className="">League of Volunteers</span>
                 </Link>
               </div>
               <div className="flex-1 overflow-auto py-2">
                 <nav className="grid items-start px-4 text-sm font-medium">
                   <NavItem href="/">
                     <UsersIcon className="h-4 w-4" />
-                    Users
+                    All Events
                   </NavItem>
                   <NavItem href="/settings">
                     <SettingsIcon className="h-4 w-4" />
-                    Settings
-                  </NavItem>
-                  <NavItem href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs">
-                    <VercelLogo className="h-4 w-4" />
-                    Deploy
+                    My Events
                   </NavItem>
                 </nav>
               </div>
@@ -57,7 +53,7 @@ export default function RootLayout({
                 href="/"
               >
                 <Logo />
-                <span className="">ACME</span>
+                <span className="">League of Volunteers</span>
               </Link>
               <User />
             </header>
