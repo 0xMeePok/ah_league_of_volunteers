@@ -6,13 +6,47 @@ interface DetailsProps {
     details: SelectEvent;
 }
 
-export function Details({details}: DetailsProps) {
+export function Details({ details }: DetailsProps) {
+    const textClass = 'text-center my-1';
     return (
         <>
-        <h1>{details.event_name}</h1>
-        <p>{details.address}</p>
-        <p>{details.description}</p>
-        <p>{details.organisation}</p>
+            <div className="flex flex-col">
+                <h1 style={{
+                    fontSize: 40,
+                    textAlign: 'center',
+                }}> {details.event_name} </h1>
+                <img src="https://www.savethechildren.org/content/dam/global/images/countries/burundi/burunid-girl-baby-m194852-hero.jpg/_jcr_content/renditions/original.img.jpg" />
+                <text className={textClass}>
+                    organisation: {details.organisation}
+                </text>
+
+                <text className={textClass}>
+                    address: {details.address}
+                </text>
+
+                <text className={textClass}>
+                    region: {details.region}
+                </text>
+
+                <text className={textClass}>
+                    description: {details.description}
+                </text>
+                <text className={textClass}>
+                    duration: {details.duration}
+                </text>
+                <div style={{
+                    textAlign: 'center'
+                }}>
+                    <button style={{
+                        color: "white",
+                        width: 150,
+                        backgroundColor: 'black',
+                        borderRadius: 50,
+                        height: 40,
+                        textAlign: 'center',
+                    }}>register for event</button>
+                </div>
+            </div>
         </>
     );
 }
