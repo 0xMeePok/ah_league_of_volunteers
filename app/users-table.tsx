@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { SelectEvent } from '@/lib/db';
 import { deleteUser } from './actions';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export function EventsTable({
   events,
@@ -76,15 +77,11 @@ function EventRow({ event }: { event: SelectEvent }) {
       <TableCell className="hidden md:table-cell">{event.end_date}</TableCell>
       <TableCell className="hidden md:table-cell">{event.duration}</TableCell>
       <TableCell>
-        <Button
-          className="w-full"
-          size="sm"
-          variant="outline"
-          formAction={deleteUserWithId}
-          disabled
-        >
-          More Info
-        </Button>
+      <Link href={`/listingDetails/${event.eid}`}>
+          <Button>
+            More Info
+          </Button>
+        </Link>
       </TableCell>
     </TableRow>
   );

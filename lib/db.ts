@@ -57,6 +57,11 @@ export async function getEvents(
   return { events: moreEvents, newOffset };
 }
 
+export async function getSpecificEventById(id: number) {
+  const result =  await db.select().from(events).where(eq(events.eid, id));
+  return result;
+}
+
 export async function deleteUserById(id: number) {
   await db.delete(events).where(eq(events.eid, id));
 }
