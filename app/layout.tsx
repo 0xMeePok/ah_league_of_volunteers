@@ -56,7 +56,7 @@ export default function RootLayout({
                 <span className="">League of Volunteers</span>
               </Link>
               <Link href={"/register_event"}>
-                Register Event
+                Create Event
               </Link>
               <User />
             </header>
