@@ -55,6 +55,9 @@ export default function RootLayout({
                 <Logo />
                 <span className="">League of Volunteers</span>
               </Link>
+              <Link href={"/register_event"}>
+                Register Event
+              </Link>
               <User />
             </header>
             {children}
