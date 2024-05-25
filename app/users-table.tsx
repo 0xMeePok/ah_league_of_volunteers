@@ -10,16 +10,19 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SelectEvent } from '@/lib/db';
-import { deleteUser } from './actions';
+import { deleteUser, getSessionUser } from './actions';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Session } from 'next-auth';
 
 export function EventsTable({
   events,
-  offset
+  offset,
+  session,
 }: {
   events: SelectEvent[];
   offset: number | null;
+  session: Session | null;
 }) {
   const router = useRouter();
 
@@ -44,7 +47,7 @@ export function EventsTable({
           </TableHeader>
           <TableBody>
             {events.map((event) => (
-              <EventRow key={event.eid} event={event} />
+              <EventRow key={event.eid} event={event} session={session}/>
             ))}
           </TableBody>
         </Table>
@@ -62,10 +65,7 @@ export function EventsTable({
   );
 }
 
-function EventRow({ event }: { event: SelectEvent }) {
-  const eventId = event.eid;
-  const deleteUserWithId = deleteUser.bind(null, eventId);
-
+function EventRow({ event, session }: { event: SelectEvent, session: Session | null}) {
   return (
     <TableRow>
       {/* 6 columns */}
@@ -77,11 +77,12 @@ function EventRow({ event }: { event: SelectEvent }) {
       <TableCell className="hidden md:table-cell">{event.end_date}</TableCell>
       <TableCell className="hidden md:table-cell">{event.duration}</TableCell>
       <TableCell>
-      <Link href={`/listingDetails/${event.eid}`}>
-          <Button>
-            More Info
-          </Button>
-        </Link>
+      <Link href={`/listingDetails/${event.eid}`}
+        style={
+          session ? {}
+          : {pointerEvents: 'none'}
+        }>
+      </Link>
       </TableCell>
     </TableRow>
   );

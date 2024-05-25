@@ -10,8 +10,8 @@ export async function User() {
   if (!user) {
     return (
       <Link href="/api/auth/signin">
-                                <p>Sign in</p>
-                            </Link>
+        <p>Sign in</p>
+      </Link>
     );
   }
 
