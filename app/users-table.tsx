@@ -18,11 +18,9 @@ import { Session } from 'next-auth';
 export function EventsTable({
   events,
   offset,
-  session,
 }: {
   events: SelectEvent[];
   offset: number | null;
-  session: Session | null;
 }) {
   const router = useRouter();
 
@@ -47,7 +45,7 @@ export function EventsTable({
           </TableHeader>
           <TableBody>
             {events.map((event) => (
-              <EventRow key={event.eid} event={event} session={session}/>
+              <EventRow key={event.eid} event={event}/>
             ))}
           </TableBody>
         </Table>
@@ -65,7 +63,7 @@ export function EventsTable({
   );
 }
 
-function EventRow({ event, session }: { event: SelectEvent, session: Session | null}) {
+function EventRow({ event }: { event: SelectEvent }) {
   return (
     <TableRow>
       {/* 6 columns */}
@@ -77,12 +75,7 @@ function EventRow({ event, session }: { event: SelectEvent, session: Session | n
       <TableCell className="hidden md:table-cell">{event.end_date}</TableCell>
       <TableCell className="hidden md:table-cell">{event.duration}</TableCell>
       <TableCell>
-      <Link href={`/listingDetails/${event.eid}`}
-        style={
-          session ? {}
-          : {pointerEvents: 'none'}
-        }
-        >
+      <Link href={`/listingDetails/${event.eid}`}>
         <Button>
           More info
         </Button>

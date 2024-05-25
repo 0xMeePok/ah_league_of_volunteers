@@ -1,4 +1,5 @@
 // app/ListingDetailsPage.tsx
+import { auth } from "@/lib/auth";
 import { getEventDetails } from "app/actions";
 
 interface ListingDetailsPageProps {
@@ -10,6 +11,7 @@ interface ListingDetailsPageProps {
 export default async function ListingDetailsPage({ params }: ListingDetailsPageProps) {
   const { event_id } = params;
   const result = await getEventDetails(parseInt(event_id));
+  const session = await auth();
   const textClass = 'text-center my-1';
   return (
         <div className="flex flex-col">
@@ -39,6 +41,7 @@ export default async function ListingDetailsPage({ params }: ListingDetailsPageP
                 <div style={{
                     textAlign:'center'
                 }}>
+                    {session ? 
                     <button style={{
                         color:"white",
                         width:150,
@@ -47,6 +50,9 @@ export default async function ListingDetailsPage({ params }: ListingDetailsPageP
                         height:40,
                         textAlign:'center',
                     }}>register for event</button>
+                    :<></>
+                }
+                    
                 </div>
             </div>
   );
