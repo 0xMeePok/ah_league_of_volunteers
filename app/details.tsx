@@ -11,10 +11,11 @@ export function Details({ details }: DetailsProps) {
     return (
         <>
             <div className="flex flex-col">
-                <h1 style={{
-                    fontSize: 40,
-                    textAlign: 'center',
-                }}> {details.event_name} </h1>
+                <div className="flex items-center mb-8">
+                    <h1 className="font-semibold text-lg md:text-2xl">
+                        {details.event_name}
+                    </h1>
+                </div>
                 <img src="https://www.savethechildren.org/content/dam/global/images/countries/burundi/burunid-girl-baby-m194852-hero.jpg/_jcr_content/renditions/original.img.jpg" />
                 <text className={textClass}>
                     organisation: {details.organisation}
