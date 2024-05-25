@@ -81,7 +81,11 @@ function EventRow({ event, session }: { event: SelectEvent, session: Session | n
         style={
           session ? {}
           : {pointerEvents: 'none'}
-        }>
+        }
+        >
+        <Button>
+          More info
+        </Button>
       </Link>
       </TableCell>
     </TableRow>
