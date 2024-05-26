@@ -38,7 +38,7 @@ export default function RootLayout({
                     <UsersIcon className="h-4 w-4" />
                     All Events
                   </NavItem>
-                  <NavItem href="/settings">
+                  <NavItem href="/registered">
                     <SettingsIcon className="h-4 w-4" />
                     My Events
                   </NavItem>
